@@ -1,8 +1,8 @@
-// PREÇOS DOS PRODUTOS FIXOS
-const PRECOS = {
-    pastel: 8.00,
-    coxinha: 8.00,
-    refri: 5.00
+// PREÇOS E NOMES DOS PRODUTOS FIXOS
+const PRODUTOS = {
+    pastel: { nome: 'Pastel', preco: 8.00 },
+    coxinha: { nome: 'Coxinha', preco: 8.00 },
+    refri: { nome: 'Refrigerante', preco: 5.00 }
 };
 
 // ESTADO DO CAIXA
@@ -13,6 +13,7 @@ let quantidades = {
 };
 
 let fiados = [];
+let historicoVendas = [];
 
 // ELEMENTOS DOM
 const elQtdPastel = document.getElementById('qtd-pastel');
@@ -23,20 +24,26 @@ const elSubtotalPastel = document.getElementById('subtotal-pastel');
 const elSubtotalCoxinha = document.getElementById('subtotal-coxinha');
 const elSubtotalRefri = document.getElementById('subtotal-refri');
 
-const elResumoFixos = document.getElementById('resumo-fixos');
-const elResumoOutros = document.getElementById('resumo-outros');
+const elResumoItensLista = document.getElementById('resumo-itens-lista');
 const elTotalGeral = document.getElementById('total-geral');
 
 const elValorPago = document.getElementById('valor-pago');
 const elTrocoBox = document.getElementById('troco-box');
 const elTrocoLabel = document.getElementById('troco-label');
 const elTrocoValor = document.getElementById('troco-valor');
+const btnConcluirVenda = document.getElementById('btn-concluir-venda');
 
 const elFiadoNome = document.getElementById('fiado-nome');
 const elFiadoValor = document.getElementById('fiado-valor');
 const elFiadoLista = document.getElementById('fiado-lista');
 const btnAddFiado = document.getElementById('btn-add-fiado');
-const btnReset = document.getElementById('btn-reset');
+
+// ELEMENTOS DO MODAL HISTÓRICO
+const btnHistorico = document.getElementById('btn-historico');
+const btnFecharModal = document.getElementById('btn-fechar-modal');
+const modalHistorico = document.getElementById('modal-historico');
+const elListaHistorico = document.getElementById('lista-historico');
+const elTotalFaturado = document.getElementById('total-faturado');
 
 // ADICIONAR OU REMOVER QUANTIDADE
 function alterarQtd(item, delta) {
@@ -46,7 +53,7 @@ function alterarQtd(item, delta) {
     }
 }
 
-// ADICIONAR ITEM NA LISTA DE FIADO/OUTROS
+// ADICIONAR ITEM FIADO/OUTROS
 btnAddFiado.addEventListener('click', () => {
     const nome = elFiadoNome.value.trim() || 'Item Sem Nome';
     const valor = parseFloat(elFiadoValor.value);
@@ -58,7 +65,6 @@ btnAddFiado.addEventListener('click', () => {
 
     fiados.push({ id: Date.now(), nome, valor });
     
-    // Limpar inputs de fiado
     elFiadoNome.value = '';
     elFiadoValor.value = '';
 
@@ -66,14 +72,14 @@ btnAddFiado.addEventListener('click', () => {
     atualizarCalculos();
 });
 
-// REMOVER ITEM DO FIADO
+// REMOVER ITEM FIADO
 function removerFiado(id) {
     fiados = fiados.filter(f => f.id !== id);
     renderizarFiados();
     atualizarCalculos();
 }
 
-// RENDERIZAR LISTA DE FIADOS
+// RENDERIZAR LISTA DE FIADOS NA ESQUERDA
 function renderizarFiados() {
     elFiadoLista.innerHTML = '';
     fiados.forEach(item => {
@@ -87,39 +93,73 @@ function renderizarFiados() {
     });
 }
 
-// ATALHO PARA BOTAO DE DINHEIRO RÁPIDO
+// ATALHO PARA DINHEIRO RÁPIDO
 function adicionarDinheiroAtalho(valor) {
     const atual = parseFloat(elValorPago.value) || 0;
     elValorPago.value = (atual + valor).toFixed(2);
     atualizarCalculos();
 }
 
-// RECALCULAR TOTAL E TROCO
+// RECALCULAR TOTAL E TROCO (DINÂMICO)
 function atualizarCalculos() {
-    // 1. Atualiza Contadores visuais dos cards
+    // 1. Atualizar contadores visuais dos cards
     elQtdPastel.textContent = quantidades.pastel;
     elQtdCoxinha.textContent = quantidades.coxinha;
     elQtdRefri.textContent = quantidades.refri;
 
-    // 2. Subtotais Individuais
-    const subPastel = quantidades.pastel * PRECOS.pastel;
-    const subCoxinha = quantidades.coxinha * PRECOS.coxinha;
-    const subRefri = quantidades.refri * PRECOS.refri;
+    // 2. Subtotais Individuais dos cards
+    const subPastel = quantidades.pastel * PRODUTOS.pastel.preco;
+    const subCoxinha = quantidades.coxinha * PRODUTOS.coxinha.preco;
+    const subRefri = quantidades.refri * PRODUTOS.refri.preco;
 
     elSubtotalPastel.textContent = `R$ ${subPastel.toFixed(2).replace('.', ',')}`;
     elSubtotalCoxinha.textContent = `R$ ${subCoxinha.toFixed(2).replace('.', ',')}`;
     elSubtotalRefri.textContent = `R$ ${subRefri.toFixed(2).replace('.', ',')}`;
 
-    // 3. Totais Acumulados
-    const totalFixos = subPastel + subCoxinha + subRefri;
-    const totalOutros = fiados.reduce((acc, cur) => acc + cur.valor, 0);
-    const totalGeral = totalFixos + totalOutros;
+    // 3. Renderizar Resumo da Conta (Apenas o que foi adicionado)
+    elResumoItensLista.innerHTML = '';
+    let totalGeral = 0;
+    let temItem = false;
 
-    elResumoFixos.textContent = `R$ ${totalFixos.toFixed(2).replace('.', ',')}`;
-    elResumoOutros.textContent = `R$ ${totalOutros.toFixed(2).replace('.', ',')}`;
+    // Verificar produtos fixos com qtd > 0
+    Object.keys(quantidades).forEach(key => {
+        const qtd = quantidades[key];
+        if (qtd > 0) {
+            temItem = true;
+            const subtotal = qtd * PRODUTOS[key].preco;
+            totalGeral += subtotal;
+
+            const div = document.createElement('div');
+            div.className = 'summary-item-row';
+            div.innerHTML = `
+                <span>${qtd}x ${PRODUTOS[key].nome}</span>
+                <strong>R$ ${subtotal.toFixed(2).replace('.', ',')}</strong>
+            `;
+            elResumoItensLista.appendChild(div);
+        }
+    });
+
+    // Verificar fiados/outros itens
+    fiados.forEach(f => {
+        temItem = true;
+        totalGeral += f.valor;
+
+        const div = document.createElement('div');
+        div.className = 'summary-item-row';
+        div.innerHTML = `
+            <span>1x ${f.nome} (Outros)</span>
+            <strong>R$ ${f.valor.toFixed(2).replace('.', ',')}</strong>
+        `;
+        elResumoItensLista.appendChild(div);
+    });
+
+    if (!temItem) {
+        elResumoItensLista.innerHTML = '<div class="summary-item-empty">Nenhum item adicionado</div>';
+    }
+
     elTotalGeral.textContent = `R$ ${totalGeral.toFixed(2).replace('.', ',')}`;
 
-    // 4. Cálculo do Troco
+    // 4. Cálculo do Troco e Visibilidade do Botão Concluir
     const valorPagoInput = elValorPago.value;
     const valorPago = parseFloat(valorPagoInput);
 
@@ -127,29 +167,98 @@ function atualizarCalculos() {
         elTrocoBox.className = 'change-box neutral';
         elTrocoLabel.textContent = 'Aguardando valor...';
         elTrocoValor.textContent = 'R$ 0,00';
+        btnConcluirVenda.classList.add('hidden');
     } else {
         const diferenca = valorPago - totalGeral;
 
-        if (diferenca >= 0) {
+        if (diferenca >= 0 && totalGeral > 0) {
+            // Valor exato ou sobrando troco -> Fica VERDE e libera o botão de concluir
             elTrocoBox.className = 'change-box success';
-            elTrocoLabel.textContent = 'TROCO A DEVOLVER:';
+            elTrocoLabel.textContent = diferenca === 0 ? 'PAGAMENTO EXATO' : 'TROCO A DEVOLVER:';
             elTrocoValor.textContent = `R$ ${diferenca.toFixed(2).replace('.', ',')}`;
+            btnConcluirVenda.classList.remove('hidden');
         } else {
+            // Faltando dinheiro -> Fica VERMELHO e esconde o botão
             elTrocoBox.className = 'change-box warning';
             elTrocoLabel.textContent = 'FALTA RECEBER:';
             elTrocoValor.textContent = `R$ ${Math.abs(diferenca).toFixed(2).replace('.', ',')}`;
+            btnConcluirVenda.classList.add('hidden');
         }
     }
 }
 
-// RESETAR/LIMPAR CAIXA
-btnReset.addEventListener('click', () => {
+// CONCLUIR VENDA (SALVAR E LIMPAR)
+function concluirVenda() {
+    const totalGeralText = elTotalGeral.textContent;
+    const valorPago = parseFloat(elValorPago.value) || 0;
+    
+    let itensResumo = [];
+    Object.keys(quantidades).forEach(key => {
+        if (quantidades[key] > 0) {
+            itensResumo.push(`${quantidades[key]}x ${PRODUTOS[key].nome}`);
+        }
+    });
+    fiados.forEach(f => itensResumo.push(`1x ${f.nome}`));
+
+    // Registrar no histórico
+    const venda = {
+        id: Date.now(),
+        hora: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+        itens: itensResumo.join(', '),
+        total: parseFloat(totalGeralText.replace('R$', '').replace('.', '').replace(',', '.')),
+        pago: valorPago
+    };
+
+    historicoVendas.unshift(venda);
+
+    // Resetar campos para a próxima venda
     quantidades = { pastel: 0, coxinha: 0, refri: 0 };
     fiados = [];
     elValorPago.value = '';
     renderizarFiados();
     atualizarCalculos();
+}
+
+// MODAL E HISTÓRICO
+btnHistorico.addEventListener('click', () => {
+    renderizarHistorico();
+    modalHistorico.classList.remove('hidden');
 });
 
-// ESCUTAR DIGITAÇÃO NO CAMPO DE PAGAMENTO
+btnFecharModal.addEventListener('click', () => {
+    modalHistorico.classList.add('hidden');
+});
+
+function renderizarHistorico() {
+    elListaHistorico.innerHTML = '';
+    let faturamentoTotal = 0;
+
+    if (historicoVendas.length === 0) {
+        elListaHistorico.innerHTML = '<p class="summary-item-empty">Nenhuma venda registrada ainda.</p>';
+    } else {
+        historicoVendas.forEach(venda => {
+            faturamentoTotal += venda.total;
+            const card = document.createElement('div');
+            card.className = 'history-card';
+            card.innerHTML = `
+                <div class="history-card-header">
+                    <span>${venda.hora} - R$ ${venda.total.toFixed(2).replace('.', ',')}</span>
+                </div>
+                <div class="history-card-details">${venda.itens}</div>
+            `;
+            elListaHistorico.appendChild(card);
+        });
+    }
+
+    elTotalFaturado.textContent = `R$ ${faturamentoTotal.toFixed(2).replace('.', ',')}`;
+}
+
+function limparHistorico() {
+    if (confirm('Deseja realmente apagar todo o histórico de vendas?')) {
+        historicoVendas = [];
+        renderizarHistorico();
+    }
+}
+
+// ESCUTAR DIGITAÇÃO
 elValorPago.addEventListener('input', atualizarCalculos);

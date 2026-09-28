@@ -18,9 +18,9 @@
                 <h1>Caixa de Festa</h1>
                 <p>Calculadora & Controle de Vendas</p>
             </div>
-            <button id="btn-reset" class="btn-secondary" title="Reiniciar/Nova Venda">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
-                Limpar / Nova Venda
+            <button id="btn-historico" class="btn-secondary" title="Ver Histórico de Vendas">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="9"/></svg>
+                Ver Histórico
             </button>
         </header>
 
@@ -38,9 +38,7 @@
                     <div class="product-card">
                         <div class="product-img-container">
                             <svg viewBox="0 0 200 140" class="product-svg">
-                                <!-- Corpo do pastel de feira -->
                                 <polygon points="20,105 180,105 160,35 40,35" fill="#F3F4F6" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
-                                <!-- Borda frisada inferior com carimbo de garfo -->
                                 <line x1="20" y1="105" x2="180" y2="105" stroke="#111827" stroke-width="6"/>
                                 <line x1="30" y1="100" x2="30" y2="110" stroke="#111827" stroke-width="2"/>
                                 <line x1="50" y1="100" x2="50" y2="110" stroke="#111827" stroke-width="2"/>
@@ -50,7 +48,6 @@
                                 <line x1="130" y1="100" x2="130" y2="110" stroke="#111827" stroke-width="2"/>
                                 <line x1="150" y1="100" x2="150" y2="110" stroke="#111827" stroke-width="2"/>
                                 <line x1="170" y1="100" x2="170" y2="110" stroke="#111827" stroke-width="2"/>
-                                <!-- Bolhas da massa frita -->
                                 <circle cx="60" cy="60" r="3" fill="#111827"/>
                                 <circle cx="85" cy="75" r="4" fill="#111827"/>
                                 <circle cx="115" cy="55" r="3" fill="#111827"/>
@@ -78,11 +75,8 @@
                     <div class="product-card">
                         <div class="product-img-container">
                             <svg viewBox="0 0 200 140" class="product-svg">
-                                <!-- Silhueta gota de coxinha -->
                                 <path d="M 100 25 C 120 40 155 75 155 105 C 155 125 130 130 100 130 C 70 130 45 125 45 105 C 45 75 80 40 100 25 Z" fill="#F3F4F6" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
-                                <!-- Ponta dobrada clássica -->
                                 <path d="M 100 25 C 96 20 92 20 88 23" fill="none" stroke="#111827" stroke-width="4" stroke-linecap="round"/>
-                                <!-- Textura de empanado -->
                                 <circle cx="80" cy="85" r="2" fill="#111827"/>
                                 <circle cx="100" cy="105" r="2" fill="#111827"/>
                                 <circle cx="120" cy="80" r="2" fill="#111827"/>
@@ -112,16 +106,11 @@
                     <div class="product-card">
                         <div class="product-img-container">
                             <svg viewBox="0 0 200 140" class="product-svg">
-                                <!-- Corpo cilíndrico da lata -->
                                 <rect x="70" y="32" width="60" height="90" rx="6" fill="#F3F4F6" stroke="#111827" stroke-width="4"/>
-                                <!-- Topo / Tampa da lata -->
                                 <ellipse cx="100" cy="32" rx="30" ry="7" fill="#E5E7EB" stroke="#111827" stroke-width="4"/>
-                                <!-- Lacre de abertura -->
                                 <ellipse cx="100" cy="32" rx="8" ry="3" fill="none" stroke="#111827" stroke-width="2"/>
-                                <!-- Rótulo preto minimalista central -->
                                 <rect x="70" y="58" width="60" height="38" fill="#111827"/>
                                 <line x1="80" y1="77" x2="120" y2="77" stroke="#FFFFFF" stroke-width="4" stroke-linecap="round"/>
-                                <!-- Bolinhas de gás saindo -->
                                 <circle cx="140" cy="50" r="4" fill="none" stroke="#111827" stroke-width="2"/>
                                 <circle cx="148" cy="35" r="2.5" fill="none" stroke="#111827" stroke-width="2"/>
                                 <circle cx="58" cy="65" r="3" fill="none" stroke="#111827" stroke-width="2"/>
@@ -168,26 +157,20 @@
                 </div>
             </section>
 
-            <!-- COLUNA DIREITA: CALCULADORA DE TROCO E RESUMO -->
+            <!-- COLUNA DIREITA: RESUMO E TROCO -->
             <section class="right-column">
                 <div class="summary-card">
                     <h2 class="summary-title">Resumo da Conta</h2>
 
-                    <!-- COMPONENTES DO TOTAL -->
-                    <div class="summary-details">
-                        <div class="summary-row">
-                            <span>Itens Fixos:</span>
-                            <span id="resumo-fixos">R$ 0,00</span>
-                        </div>
-                        <div class="summary-row">
-                            <span>Fiado / Outros:</span>
-                            <span id="resumo-outros">R$ 0,00</span>
-                        </div>
-                        <div class="summary-divider"></div>
-                        <div class="summary-total-row">
-                            <span>TOTAL DEVIDO</span>
-                            <span id="total-geral">R$ 0,00</span>
-                        </div>
+                    <!-- LISTA DINÂMICA DE ITENS SELECIONADOS -->
+                    <div id="resumo-itens-lista" class="summary-items-list">
+                        <!-- Gerado via JavaScript -->
+                    </div>
+
+                    <div class="summary-divider"></div>
+                    <div class="summary-total-row">
+                        <span>TOTAL DEVIDO</span>
+                        <span id="total-geral">R$ 0,00</span>
                     </div>
 
                     <!-- ENTRADA DE PAGAMENTO E CÁLCULO DE TROCO -->
@@ -203,16 +186,41 @@
                             <button onclick="adicionarDinheiroAtalho(50)" class="btn-cash">+50</button>
                         </div>
 
-                        <!-- RESULTADO DO TROCO -->
+                        <!-- RESULTADO DO TROCO / BOTÃO DE CONCLUIR -->
                         <div id="troco-box" class="change-box neutral">
                             <div id="troco-label" class="change-label">Aguardando valor...</div>
                             <div id="troco-valor" class="change-value">R$ 0,00</div>
+                            <button id="btn-concluir-venda" class="btn-concluir hidden" onclick="concluirVenda()">
+                                ✓ Concluir Venda
+                            </button>
                         </div>
                     </div>
                 </div>
             </section>
 
         </main>
+    </div>
+
+    <!-- MODAL HISTÓRICO DE VENDAS -->
+    <div id="modal-historico" class="modal-overlay hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Histórico de Vendas</h2>
+                <button id="btn-fechar-modal" class="btn-close">✕</button>
+            </div>
+            <div class="modal-body">
+                <div class="faturamento-box">
+                    <span>Total Faturado:</span>
+                    <strong id="total-faturado">R$ 0,00</strong>
+                </div>
+                <div id="lista-historico" class="history-list">
+                    <!-- Registros de vendas via JavaScript -->
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button onclick="limparHistorico()" class="btn-danger">Limpar Histórico</button>
+            </div>
+        </div>
     </div>
 
     <script src="script.js"></script>

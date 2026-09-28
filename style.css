@@ -322,29 +322,40 @@ body {
 .summary-title {
     font-size: 1.25rem;
     font-weight: 700;
-    margin-bottom: 16px;
+    margin-bottom: 12px;
     border-bottom: 1px solid #F3F4F6;
     padding-bottom: 8px;
 }
 
-.summary-details {
+.summary-items-list {
     display: flex;
     flex-direction: column;
-    gap: 8px;
-    margin-bottom: 20px;
+    gap: 6px;
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: auto;
+    margin-bottom: 12px;
 }
 
-.summary-row {
+.summary-item-row {
     display: flex;
     justify-content: space-between;
-    color: #4B5563;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    color: #374151;
+}
+
+.summary-item-empty {
+    color: #9CA3AF;
+    font-size: 0.875rem;
+    font-style: italic;
+    text-align: center;
+    padding: 10px 0;
 }
 
 .summary-divider {
     height: 1px;
     background-color: #E5E7EB;
-    margin: 4px 0;
+    margin: 8px 0;
 }
 
 .summary-total-row {
@@ -352,6 +363,7 @@ body {
     justify-content: space-between;
     font-size: 1.35rem;
     font-weight: 800;
+    margin-bottom: 16px;
 }
 
 /* PAGAMENTO E TROCO */
@@ -408,12 +420,16 @@ body {
     background-color: #E5E7EB;
 }
 
-/* RESULTADO DO TROCO CONDIÇÕES */
+/* CAIXA DE TROCO & BOTÃO DE CONCLUIR */
 .change-box {
     padding: 16px;
     border-radius: 8px;
     text-align: center;
     transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
 }
 
 .change-label {
@@ -432,11 +448,150 @@ body {
 }
 
 .change-box.success {
-    background-color: #111827;
+    background-color: #10B981;
     color: #FFFFFF;
 }
 
 .change-box.warning {
     background-color: #FEE2E2;
     color: #991B1B;
+}
+
+.btn-concluir {
+    width: 100%;
+    background-color: #047857;
+    color: #FFFFFF;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    margin-top: 4px;
+}
+
+.btn-concluir:hover {
+    background-color: #065F46;
+}
+
+.hidden {
+    display: none !important;
+}
+
+/* MODAL HISTÓRICO */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    padding: 16px;
+}
+
+.modal-content {
+    background-color: #FFFFFF;
+    border-radius: 12px;
+    width: 100%;
+    max-width: 500px;
+    max-height: 80vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 20px 25px -5px rgba(0,0,0,0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    border-bottom: 1px solid #E5E7EB;
+}
+
+.modal-header h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #6B7280;
+}
+
+.modal-body {
+    padding: 16px 20px;
+    overflow-y: auto;
+    flex: 1;
+}
+
+.faturamento-box {
+    display: flex;
+    justify-content: space-between;
+    background-color: #F3F4F6;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.faturamento-box strong {
+    font-size: 1.2rem;
+    color: #047857;
+}
+
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.history-card {
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 10px 12px;
+    font-size: 0.875rem;
+}
+
+.history-card-header {
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    margin-bottom: 4px;
+}
+
+.history-card-details {
+    color: #6B7280;
+    font-size: 0.8rem;
+}
+
+.modal-footer {
+    padding: 12px 20px;
+    border-top: 1px solid #E5E7EB;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.btn-danger {
+    background-color: #EF4444;
+    color: #FFFFFF;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-danger:hover {
+    background-color: #DC2626;
 }
