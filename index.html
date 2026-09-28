@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caixa de Festa Minimalista</title>
+    <!-- Importação de fonte moderna e limpa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="app-container">
+        <!-- CABEÇALHO -->
+        <header class="header">
+            <div>
+                <h1>Caixa de Festa</h1>
+                <p>Calculadora & Controle de Vendas</p>
+            </div>
+            <button id="btn-reset" class="btn-secondary" title="Reiniciar/Nova Venda">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+                Limpar / Nova Venda
+            </button>
+        </header>
+
+        <!-- LAYOUT PRINCIPAL -->
+        <main class="main-grid">
+
+            <!-- COLUNA ESQUERDA: PRODUTOS E FIADO -->
+            <section class="left-column">
+                <h2 class="section-title">Produtos Fixo</h2>
+
+                <!-- CARDS DE PRODUTOS FIXOS -->
+                <div class="products-grid">
+
+                    <!-- PASTEL -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <svg viewBox="0 0 200 140" class="product-svg">
+                                <path d="M 20 110 Q 100 10 180 110 Z" fill="#E5E7EB" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
+                                <path d="M 25 110 Q 100 20 175 110" fill="none" stroke="#9CA3AF" stroke-width="2" stroke-dasharray="4 4"/>
+                                <line x1="20" y1="110" x2="180" y2="110" stroke="#111827" stroke-width="6"/>
+                                <circle cx="70" cy="75" r="3" fill="#111827"/>
+                                <circle cx="100" cy="60" r="3" fill="#111827"/>
+                                <circle cx="130" cy="75" r="3" fill="#111827"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Pastel</div>
+                            <div class="product-price">R$ 8,00</div>
+                        </div>
+                        <div class="controls-row">
+                            <div class="qty-controls">
+                                <button onclick="alterarQtd('pastel', -1)" class="btn-qty">-</button>
+                                <span id="qtd-pastel" class="qty-display">0</span>
+                                <button onclick="alterarQtd('pastel', 1)" class="btn-qty">+</button>
+                            </div>
+                            <div class="subtotal-display">
+                                <span class="subtotal-label">Total:</span>
+                                <span id="subtotal-pastel" class="subtotal-value">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- COXINHA -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <svg viewBox="0 0 200 140" class="product-svg">
+                                <path d="M 100 20 C 130 50 150 80 150 110 C 150 125 128 130 100 130 C 72 130 50 125 50 110 C 50 80 70 50 100 20 Z" fill="#E5E7EB" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
+                                <path d="M 90 22 C 95 30 105 30 110 22" fill="none" stroke="#111827" stroke-width="3"/>
+                                <circle cx="90" cy="80" r="2" fill="#9CA3AF"/>
+                                <circle cx="110" cy="95" r="2" fill="#9CA3AF"/>
+                                <circle cx="100" cy="110" r="2" fill="#9CA3AF"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Coxinha</div>
+                            <div class="product-price">R$ 8,00</div>
+                        </div>
+                        <div class="controls-row">
+                            <div class="qty-controls">
+                                <button onclick="alterarQtd('coxinha', -1)" class="btn-qty">-</button>
+                                <span id="qtd-coxinha" class="qty-display">0</span>
+                                <button onclick="alterarQtd('coxinha', 1)" class="btn-qty">+</button>
+                            </div>
+                            <div class="subtotal-display">
+                                <span class="subtotal-label">Total:</span>
+                                <span id="subtotal-coxinha" class="subtotal-value">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- REFRIGERANTE -->
+                    <div class="product-card">
+                        <div class="product-img-container">
+                            <svg viewBox="0 0 200 140" class="product-svg">
+                                <rect x="75" y="15" width="50" height="15" rx="3" fill="#E5E7EB" stroke="#111827" stroke-width="4"/>
+                                <path d="M 70 30 L 130 30 L 120 45 L 120 120 C 120 128 115 130 100 130 C 85 130 80 128 80 120 L 80 45 Z" fill="#E5E7EB" stroke="#111827" stroke-width="4" stroke-linejoin="round"/>
+                                <line x1="80" y1="65" x2="120" y2="65" stroke="#111827" stroke-width="3"/>
+                                <line x1="80" y1="95" x2="120" y2="95" stroke="#111827" stroke-width="3"/>
+                                <circle cx="100" cy="80" r="4" fill="#111827"/>
+                            </svg>
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">Refrigerante</div>
+                            <div class="product-price">R$ 5,00</div>
+                        </div>
+                        <div class="controls-row">
+                            <div class="qty-controls">
+                                <button onclick="alterarQtd('refri', -1)" class="btn-qty">-</button>
+                                <span id="qtd-refri" class="qty-display">0</span>
+                                <button onclick="alterarQtd('refri', 1)" class="btn-qty">+</button>
+                            </div>
+                            <div class="subtotal-display">
+                                <span class="subtotal-label">Total:</span>
+                                <span id="subtotal-refri" class="subtotal-value">R$ 0,00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- SEÇÃO FIADO / OUTROS ITENS -->
+                <div class="fiado-section">
+                    <div class="fiado-header">
+                        <h3>Fiados / Outros Itens</h3>
+                        <span class="badge">Anotações</span>
+                    </div>
+
+                    <div class="fiado-form">
+                        <input type="text" id="fiado-nome" placeholder="Descrição (ex: Nome do cliente, Doce)" class="input-text">
+                        <div class="fiado-input-group">
+                            <input type="number" id="fiado-valor" placeholder="Valor (R$)" step="0.50" min="0" class="input-number">
+                            <button id="btn-add-fiado" class="btn-primary">+ Adicionar</button>
+                        </div>
+                    </div>
+
+                    <!-- LISTA DE FIADOS ADICIONADOS -->
+                    <ul id="fiado-lista" class="fiado-list">
+                        <!-- Itens adicionados entram via JavaScript -->
+                    </ul>
+                </div>
+            </section>
+
+            <!-- COLUNA DIREITA: CALCULADORA DE TROCO E RESUMO -->
+            <section class="right-column">
+                <div class="summary-card">
+                    <h2 class="summary-title">Resumo da Conta</h2>
+
+                    <!-- COMPONENTES DO TOTAL -->
+                    <div class="summary-details">
+                        <div class="summary-row">
+                            <span>Itens Fixos:</span>
+                            <span id="resumo-fixos">R$ 0,00</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Fiado / Outros:</span>
+                            <span id="resumo-outros">R$ 0,00</span>
+                        </div>
+                        <div class="summary-divider"></div>
+                        <div class="summary-total-row">
+                            <span>TOTAL DEVIDO</span>
+                            <span id="total-geral">R$ 0,00</span>
+                        </div>
+                    </div>
+
+                    <!-- ENTRADA DE PAGAMENTO E CÁLCULO DE TROCO -->
+                    <div class="payment-box">
+                        <label for="valor-pago" class="payment-label">VALOR RECEBIDO (R$):</label>
+                        <input type="number" id="valor-pago" placeholder="0,00" step="0.01" min="0" class="payment-input">
+
+                        <!-- ATA
+                        TOS RÁPIDOS -->
+                        <div class="quick-cash-grid">
+                            <button onclick="adicionarDinheiroAtalho(5)" class="btn-cash">+5</button>
+                            <button onclick="adicionarDinheiroAtalho(10)" class="btn-cash">+10</button>
+                            <button onclick="adicionarDinheiroAtalho(20)" class="btn-cash">+20</button>
+                            <button onclick="adicionarDinheiroAtalho(50)" class="btn-cash">+50</button>
+                        </div>
+
+                        <!-- RESULTADO DO TROCO -->
+                        <div id="troco-box" class="change-box neutral">
+                            <div id="troco-label" class="change-label">Aguardando valor...</div>
+                            <div id="troco-valor" class="change-value">R$ 0,00</div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

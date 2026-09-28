@@ -1,0 +1,441 @@
+/* RESET E CONFIGURAÇÕES BASE */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+    background-color: #F3F4F6;
+    color: #111827;
+    padding: 12px;
+}
+
+.app-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* CABEÇALHO */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #FFFFFF;
+    padding: 16px 20px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    margin-bottom: 16px;
+}
+
+.header h1 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+}
+
+.header p {
+    font-size: 0.875rem;
+    color: #6B7280;
+}
+
+/* BOTÕES */
+.btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background-color: #F3F4F6;
+    color: #374151;
+    border: 1px solid #D1D5DB;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.875rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-secondary:hover {
+    background-color: #E5E7EB;
+}
+
+.btn-primary {
+    background-color: #111827;
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.btn-primary:hover {
+    background-color: #1F2937;
+}
+
+/* ESTRUTURA PRINCIPAL */
+.main-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+}
+
+@media (min-width: 850px) {
+    .main-grid {
+        grid-template-columns: 1fr 380px;
+    }
+}
+
+.section-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+}
+
+/* CARDS DOS PRODUTOS FIXOS */
+.products-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+@media (min-width: 600px) {
+    .products-grid {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+.product-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.product-img-container {
+    height: 100px;
+    background-color: #F9FAFB;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+}
+
+.product-svg {
+    width: 100%;
+    height: 100%;
+    max-height: 80px;
+}
+
+.product-info {
+    text-align: center;
+    margin-bottom: 12px;
+}
+
+.product-name {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.product-price {
+    font-size: 0.875rem;
+    color: #4B5563;
+    font-weight: 500;
+}
+
+.controls-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.qty-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #F3F4F6;
+    border-radius: 8px;
+    padding: 4px;
+}
+
+.btn-qty {
+    width: 40px;
+    height: 40px;
+    background-color: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    border-radius: 6px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+}
+
+.btn-qty:active {
+    background-color: #E5E7EB;
+}
+
+.qty-display {
+    font-size: 1.25rem;
+    font-weight: 700;
+    width: 30px;
+    text-align: center;
+}
+
+.subtotal-display {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F9FAFB;
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+
+.subtotal-label {
+    color: #6B7280;
+}
+
+.subtotal-value {
+    font-weight: 700;
+}
+
+/* SEÇÃO FIADO */
+.fiado-section {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 16px;
+}
+
+.fiado-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+
+.fiado-header h3 {
+    font-size: 1rem;
+    font-weight: 600;
+}
+
+.badge {
+    background-color: #F3F4F6;
+    color: #4B5563;
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.fiado-form {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+}
+
+@media (min-width: 500px) {
+    .fiado-form {
+        flex-direction: row;
+    }
+    .fiado-input-group {
+        display: flex;
+        gap: 8px;
+    }
+}
+
+.fiado-input-group {
+    display: flex;
+    gap: 8px;
+}
+
+.input-text, .input-number {
+    padding: 10px 12px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+    font-size: 0.875rem;
+    outline: none;
+}
+
+.input-text {
+    flex: 1;
+}
+
+.input-number {
+    width: 100px;
+}
+
+.input-text:focus, .input-number:focus {
+    border-color: #111827;
+}
+
+.fiado-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.fiado-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #F9FAFB;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #F3F4F6;
+    font-size: 0.875rem;
+}
+
+.btn-remove-item {
+    background: none;
+    border: none;
+    color: #EF4444;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 1.1rem;
+    padding: 0 4px;
+}
+
+/* COLUNA DE RESUMO E TROCO */
+.summary-card {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 12px;
+    padding: 20px;
+    position: sticky;
+    top: 12px;
+}
+
+.summary-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+    border-bottom: 1px solid #F3F4F6;
+    padding-bottom: 8px;
+}
+
+.summary-details {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+}
+
+.summary-row {
+    display: flex;
+    justify-content: space-between;
+    color: #4B5563;
+    font-size: 0.95rem;
+}
+
+.summary-divider {
+    height: 1px;
+    background-color: #E5E7EB;
+    margin: 4px 0;
+}
+
+.summary-total-row {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.35rem;
+    font-weight: 800;
+}
+
+/* PAGAMENTO E TROCO */
+.payment-box {
+    background-color: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 16px;
+}
+
+.payment-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 700;
+    color: #4B5563;
+    margin-bottom: 6px;
+}
+
+.payment-input {
+    width: 100%;
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 10px;
+    border: 2px solid #D1D5DB;
+    border-radius: 8px;
+    text-align: right;
+    outline: none;
+    background-color: #FFFFFF;
+    margin-bottom: 8px;
+}
+
+.payment-input:focus {
+    border-color: #111827;
+}
+
+.quick-cash-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+    margin-bottom: 16px;
+}
+
+.btn-cash {
+    background-color: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    padding: 6px;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.btn-cash:hover {
+    background-color: #E5E7EB;
+}
+
+/* RESULTADO DO TROCO CONDIÇÕES */
+.change-box {
+    padding: 16px;
+    border-radius: 8px;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.change-label {
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.change-value {
+    font-size: 1.75rem;
+    font-weight: 800;
+}
+
+.change-box.neutral {
+    background-color: #E5E7EB;
+    color: #374151;
+}
+
+.change-box.success {
+    background-color: #111827;
+    color: #FFFFFF;
+}
+
+.change-box.warning {
+    background-color: #FEE2E2;
+    color: #991B1B;
+}
