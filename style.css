@@ -399,25 +399,47 @@ body {
     border-color: #111827;
 }
 
-.quick-cash-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
+.quick-cash-container {
+    display: flex;
+    flex-direction: column;
     gap: 6px;
     margin-bottom: 16px;
 }
 
+.quick-cash-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+}
+
 .btn-cash {
-    background-color: #FFFFFF;
     border: 1px solid #D1D5DB;
     padding: 6px;
     border-radius: 6px;
     font-size: 0.8rem;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
+    transition: all 0.15s;
 }
 
-.btn-cash:hover {
-    background-color: #E5E7EB;
+.btn-cash-plus {
+    background-color: #FFFFFF;
+    color: #059669;
+}
+
+.btn-cash-plus:hover {
+    background-color: #ECFDF5;
+    border-color: #10B981;
+}
+
+.btn-cash-minus {
+    background-color: #FFFFFF;
+    color: #DC2626;
+}
+
+.btn-cash-minus:hover {
+    background-color: #FEF2F2;
+    border-color: #EF4444;
 }
 
 /* CAIXA DE TROCO & BOTÃO DE CONCLUIR */

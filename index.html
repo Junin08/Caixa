@@ -178,12 +178,20 @@
                         <label for="valor-pago" class="payment-label">VALOR RECEBIDO (R$):</label>
                         <input type="number" id="valor-pago" placeholder="0,00" step="0.01" min="0" class="payment-input">
 
-                        <!-- ATALHOS RÁPIDOS -->
-                        <div class="quick-cash-grid">
-                            <button onclick="adicionarDinheiroAtalho(5)" class="btn-cash">+5</button>
-                            <button onclick="adicionarDinheiroAtalho(10)" class="btn-cash">+10</button>
-                            <button onclick="adicionarDinheiroAtalho(20)" class="btn-cash">+20</button>
-                            <button onclick="adicionarDinheiroAtalho(50)" class="btn-cash">+50</button>
+                        <!-- ATALHOS RÁPIDOS (ADIÇÃO E SUBTRAÇÃO) -->
+                        <div class="quick-cash-container">
+                            <div class="quick-cash-grid">
+                                <button onclick="ajustarDinheiroAtalho(5)" class="btn-cash btn-cash-plus">+5</button>
+                                <button onclick="ajustarDinheiroAtalho(10)" class="btn-cash btn-cash-plus">+10</button>
+                                <button onclick="ajustarDinheiroAtalho(20)" class="btn-cash btn-cash-plus">+20</button>
+                                <button onclick="ajustarDinheiroAtalho(50)" class="btn-cash btn-cash-plus">+50</button>
+                            </div>
+                            <div class="quick-cash-grid">
+                                <button onclick="ajustarDinheiroAtalho(-5)" class="btn-cash btn-cash-minus">-5</button>
+                                <button onclick="ajustarDinheiroAtalho(-10)" class="btn-cash btn-cash-minus">-10</button>
+                                <button onclick="ajustarDinheiroAtalho(-20)" class="btn-cash btn-cash-minus">-20</button>
+                                <button onclick="ajustarDinheiroAtalho(-50)" class="btn-cash btn-cash-minus">-50</button>
+                            </div>
                         </div>
 
                         <!-- RESULTADO DO TROCO / BOTÃO DE CONCLUIR -->

@@ -93,10 +93,17 @@ function renderizarFiados() {
     });
 }
 
-// ATALHO PARA DINHEIRO RÁPIDO
-function adicionarDinheiroAtalho(valor) {
+// ATALHO PARA ADICIONAR OU SUBTRAIR DINHEIRO
+function ajustarDinheiroAtalho(valor) {
     const atual = parseFloat(elValorPago.value) || 0;
-    elValorPago.value = (atual + valor).toFixed(2);
+    const novoValor = atual + valor;
+    
+    if (novoValor <= 0) {
+        elValorPago.value = '';
+    } else {
+        elValorPago.value = novoValor.toFixed(2);
+    }
+    
     atualizarCalculos();
 }
 
