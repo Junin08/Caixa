@@ -13,7 +13,9 @@ let quantidades = {
 };
 
 let fiados = [];
-let historicoVendas = [];
+
+// CARREGAR HISTÓRICO DO NAVEGADOR (LOCALSTORAGE)
+let historicoVendas = JSON.parse(localStorage.getItem('historicoVendas_caixa')) || [];
 
 // ELEMENTOS DOM
 const elQtdPastel = document.getElementById('qtd-pastel');
@@ -218,6 +220,9 @@ function concluirVenda() {
 
     historicoVendas.unshift(venda);
 
+    // Salvar no armazenamento local do navegador
+    localStorage.setItem('historicoVendas_caixa', JSON.stringify(historicoVendas));
+
     // Resetar campos para a próxima venda
     quantidades = { pastel: 0, coxinha: 0, refri: 0 };
     fiados = [];
@@ -263,6 +268,7 @@ function renderizarHistorico() {
 function limparHistorico() {
     if (confirm('Deseja realmente apagar todo o histórico de vendas?')) {
         historicoVendas = [];
+        localStorage.removeItem('historicoVendas_caixa');
         renderizarHistorico();
     }
 }
